@@ -1,7 +1,32 @@
 const inquirer = require("inquirer");
-// const fs = require("fs");
+const fs = require("fs");
 
-// const generatePage = require("./src/page-template.js");
+const generatePage = require("./src/page-template");
+//remove mockData when testing is done
+const mockData = {
+  name: "Chandler Green",
+  github: "axeliono",
+  projects: [
+    {
+      name: "Run Buddy",
+      description:
+        "Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.",
+      languages: ["HTML", "CSS"],
+      link: "https://github.com/lernantino/run-buddy",
+      feature: true,
+      confirmAddProject: true,
+    },
+    {
+      name: "Taskinator",
+      description:
+        "Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.",
+      languages: ["JavaScript", "HTML", "CSS"],
+      link: "https://github.com/lernantino/taskinator",
+      feature: true,
+      confirmAddProject: true,
+    },
+  ],
+};
 
 // const pageHTML = generatePage(name, github);
 
@@ -127,8 +152,25 @@ const promptProject = (portfolioData) => {
     });
 };
 
-promptUser()
-  .then(promptProject)
-  .then((portfolioData) => {
-    console.log(portfolioData);
-  });
+// promptUser()
+//   .then(promptProject)
+//   .then((portfolioData) => {
+//     const pageHTML = generatePage(portfolioData);
+
+//     // fs.writeFile("./index.html", pageHTML, (err) => {
+//     //   if (err) throw new Error(err);
+
+//     //   console.log(
+//     //     "Page created! Check out index.html in this directory to see it!"
+//     //   );
+//     // });
+//   });
+
+const pageHTML = generatePage(mockData);
+fs.writeFile("./index.html", pageHTML, (err) => {
+  if (err) throw new Error(err);
+
+  console.log(
+    "Page created! Check out index.html in this directory to see it!"
+  );
+});
